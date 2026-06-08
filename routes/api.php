@@ -45,6 +45,8 @@ Route::post('/messages', [\App\Http\Controllers\MessageController::class, 'store
 Route::post('/cours/{id}/reserve', [\App\Http\Controllers\CoursController::class, 'reserve']);
 Route::post('/cours/{id}/annuler', [\App\Http\Controllers\CoursController::class, 'annuler']);
 Route::apiResource('cours', \App\Http\Controllers\CoursController::class);
-
-
 Route::apiResource('cours', CoursController::class);
+
+Route::middleware(['auth:sanctum', 'isAdmin'])->group(function () {
+    Route::apiResource('equipements', EquipementController::class);
+});
